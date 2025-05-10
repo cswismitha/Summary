@@ -6,8 +6,7 @@ async function getSummary() {
     const table = config.ddb.summarytable;
     try {
         const items = await ddb.queryDynamoDBByPartitionKey({ S : "APP#" + appId }, table);
-        console.log(items[0]);
-        return items[0];
+        return items ? items[0].summary : {};
     } catch (error) {
         console.error('Error processing item:', error);
     }
